@@ -1,4 +1,5 @@
 
+##########################
 #set data folder and input files
 data_dir<-"UCI HAR Dataset"
 
@@ -57,10 +58,10 @@ activity_label_file<-file.path(data_dir,"activity_labels.txt")
 activity_label<-read.table(activity_label_file,sep="",header=FALSE,col.names=c("label_id","Label"))
 full<-merge(activity_label,full)
 
-#####################TASK 5###################################################
+#####################TASK 5####################################################
 library(dplyr)
 tidy_summary<-full %>% select(-label_id) %>%
         group_by(Label,subject_id) %>%
         summarize_each(funs(mean))
 tidy_summary
-write.table(tidy_summary,"tidy_dataset.tx")
+write.table(tidy_summary,"tidy_dataset.txt") 
