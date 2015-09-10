@@ -63,3 +63,4 @@ tidy_summary<-full %>% select(-label_id) %>%
         group_by(Label,subject_id) %>%
         summarize_each(funs(mean))
 tidy_summary
+write.table(tidy_summary,"tidy_dataset.tx")
