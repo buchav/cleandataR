@@ -44,7 +44,7 @@ full<-rbind(train,test)
 
 #####################TASK 2###################################################
 # find features with "mean" and "std" strings
-mean_std_features<-grep("Mean|std",names(train),value=TRUE,ignore.case = TRUE)
+mean_std_features<-grep("_mean_|_mean$|std",names(train),value=TRUE)
 
 # Do not forget about Label and subject colums
 mean_std_features<-c(c("label_id","subject_id"),mean_std_features)
@@ -60,8 +60,13 @@ full<-merge(activity_label,full)
 
 #####################TASK 5####################################################
 library(dplyr)
+library(tidyr)
 tidy_summary<-full %>% select(-label_id) %>%
         group_by(Label,subject_id) %>%
         summarize_each(funs(mean))
-tidy_summary
+
+tidy_summary<-res<-tidy_summary %>% gather(measure_func_axis,value,-(c(Label,subject_id))) %>%
+  separate(measure_func_axis,into=c("Measure","Func","Axis"),sep="_",extra="merge",fill="right") %>%
+  spread(Func,value)
+
 write.table(tidy_summary,"tidy_dataset.txt") 
