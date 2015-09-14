@@ -1,8 +1,8 @@
 =========================================================
 Course project: Getting and cleaning data
 =========================================================
+
 Author: Victor V. Bucha
-=========================================================
 
 Course project cleans dataset "Human Activity Recognition Using Smartphones Dataset" in accordiance with course tasks: 
 
@@ -20,7 +20,7 @@ The repository includes following files:
 
 - 'run_Analysis.R': Script for dataset loading and processing 
 - 'tidy_dataset.txt': output dataset created by script
-- 'CodeBool.MD': a code book that describes the variables and the data
+- 'CodeBook.MD': a code book that describes the variables and the data
 - 'README.MD': This file
 
 How to run script: 
@@ -29,5 +29,3 @@ How to run script:
 2) Modify 'data_dir' variable located in 'run_Analysis.R'. It should contain a path to input dataset
 3) Run script in R
 4) Script will do processing through 1-5 steps and create 'tidy_dataset.txt' file as an output
-
-

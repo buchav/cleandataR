@@ -46,7 +46,7 @@ full<-rbind(train,test)
 # find features with "mean" and "std" strings
 mean_std_features<-grep("_mean_|_mean$|std",names(train),value=TRUE)
 
-# Do not forget about Label and subject colums
+# Do not forget about Label and subject columns
 mean_std_features<-c(c("label_id","subject_id"),mean_std_features)
 
 #Extracts only the measurements on the mean and standard deviation for each measurement + label_id + subject_id field
@@ -61,12 +61,16 @@ full<-merge(activity_label,full)
 #####################TASK 5####################################################
 library(dplyr)
 library(tidyr)
+
+#compute average values for each activity and subject
 tidy_summary<-full %>% select(-label_id) %>%
         group_by(Label,subject_id) %>%
         summarize_each(funs(mean))
 
+# generate tidy dataset
 tidy_summary<-res<-tidy_summary %>% gather(measure_func_axis,value,-(c(Label,subject_id))) %>%
   separate(measure_func_axis,into=c("Measure","Func","Axis"),sep="_",extra="merge",fill="right") %>%
   spread(Func,value)
 
+# save tidy dataset
 write.table(tidy_summary,"tidy_dataset.txt") 
